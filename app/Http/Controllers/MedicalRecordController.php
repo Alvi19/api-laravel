@@ -54,28 +54,16 @@ class MedicalRecordController extends Controller
             return response()->json(['error' => 'Medical Record not found'], 404);
         }
 
-        // Validasi hanya jika data yang disediakan tidak kosong
-        if ($request->filled(['patient_id', 'doctor_id', 'diagnosis', 'prescription'])) {
-            $request->validate([
-                'patient_id' => 'required',
-                'doctor_id' => 'required',
-                'diagnosis' => 'required',
-                'prescription' => 'required',
-            ]);
-        }
+        $request->validate([
+            'patient_id' => 'nullable',
+            'doctor_id' => 'nullable',
+            'diagnosis' => 'nullable',
+            'prescription' => 'nullable',
+        ]);
 
-        // Update model secara manual
-        $medicalRecord->patient_id = $request->input('patient_id', $medicalRecord->patient_id);
-        $medicalRecord->doctor_id = $request->input('doctor_id', $medicalRecord->doctor_id);
-        $medicalRecord->diagnosis = $request->input('diagnosis', $medicalRecord->diagnosis);
-        $medicalRecord->prescription = $request->input('prescription', $medicalRecord->prescription);
-
-        // Simpan perubahan
-        $medicalRecord->save();
-
+        $medicalRecord->update($request->all());
         return response()->json($medicalRecord, 200);
     }
-
 
     public function destroy($id)
     {

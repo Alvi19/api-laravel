@@ -57,10 +57,10 @@ class PatientController extends Controller
         }
 
         $request->validate([
-            'name' => 'required',
-            'gender' => 'required',
-            'dob' => 'required|date',
-            'address' => 'required',
+            'name' => 'nullable',
+            'gender' => 'nullable',
+            'dob' => 'nullable',
+            'address' => 'nullable',
         ]);
 
         $patient->update($request->all());

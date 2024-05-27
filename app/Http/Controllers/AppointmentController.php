@@ -54,22 +54,14 @@ class AppointmentController extends Controller
             return response()->json(['error' => 'Appointment not found'], 404);
         }
 
-        // Validasi hanya jika data yang disediakan tidak kosong
-        if ($request->filled(['patient_id', 'doctor_id', 'date', 'time'])) {
-            $request->validate([
-                'patient_id' => 'required',
-                'doctor_id' => 'required',
-                'date' => 'required|date',
-                'time' => 'required',
-            ]);
-        }
+        $request->validate([
+            'patient_id' => 'nullable',
+            'doctor_id' => 'nullable',
+            'date' => 'nullable',
+            'time' => 'nullable',
+        ]);
 
-        // Isi model appointment dengan data dari permintaan
-        $appointment->fill($request->all());
-
-        // Simpan perubahan
-        $appointment->save();
-
+        $appointment->update($request->all());
         return response()->json($appointment, 200);
     }
 

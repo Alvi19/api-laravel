@@ -55,9 +55,9 @@ class DoctorController extends Controller
         }
 
         $request->validate([
-            'name' => 'required',
-            'specialty' => 'required',
-            'contact' => 'required',
+            'name' => 'nullable',
+            'specialty' => 'nullable',
+            'contact' => 'nullable',
         ]);
 
         $doctor->update($request->all());
