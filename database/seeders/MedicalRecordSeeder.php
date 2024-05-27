@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Doctor;
-use App\Models\MedicalRecord;
-use App\Models\Patient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +33,6 @@ class MedicalRecordSeeder extends Seeder
                 'updated_at' => now(),
             ]);
 
-            // Remove the used patient and doctor ID from the arrays to prevent duplicate records
             $patients = array_diff($patients, [$patientId]);
             $doctors = array_diff($doctors, [$doctorId]);
         }

@@ -11,10 +11,8 @@ class MedicalRecordController extends Controller
     {
         $search = $request->input('q');
 
-        // Mendapatkan jumlah item per halaman dari URL, default 10 jika tidak disediakan
         $perPage = $request->input('per_page', 10);
 
-        // Query rekam medis dengan fitur pencarian dan penomoran halaman
         $medicalRecords = MedicalRecord::query()
             ->when($search, function ($query, $search) {
                 $query->where('diagnosis', 'like', "%$search%")

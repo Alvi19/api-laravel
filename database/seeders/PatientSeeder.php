@@ -20,7 +20,6 @@ class PatientSeeder extends Seeder
         $uniqueDates = [];
 
         for ($i = 0; $i < 100; $i++) {
-            // Generate unique date of birth
             do {
                 $dob = $faker->date();
             } while (in_array($dob, $uniqueDates));

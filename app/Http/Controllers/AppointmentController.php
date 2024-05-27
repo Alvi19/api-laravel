@@ -10,11 +10,8 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('q');
-
-        // Mendapatkan jumlah item per halaman dari URL, default 10 jika tidak disediakan
         $perPage = $request->input('per_page', 10);
 
-        // Query janji temu dengan fitur pencarian dan penomoran halaman
         $appointments = Appointment::query()
             ->when($search, function ($query, $search) {
                 $query->where('date', 'like', "%$search%")

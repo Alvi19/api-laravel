@@ -28,7 +28,6 @@ class AppointmentSeeder extends Seeder
             $patientId = $faker->randomElement($patients);
             $doctorId = $faker->randomElement($doctors);
 
-            // Ensure unique date and time for each appointment for each patient
             $date = $faker->dateTimeBetween('-1 month', '+1 month')->format('Y-m-d');
             $time = $faker->time('H:i:s');
 
@@ -41,8 +40,6 @@ class AppointmentSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-
-            // Remove the used patient and doctor ID from the arrays to prevent duplicate appointments
             $patients = array_diff($patients, [$patientId]);
             $doctors = array_diff($doctors, [$doctorId]);
         }
